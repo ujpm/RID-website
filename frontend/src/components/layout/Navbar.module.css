@@ -1,0 +1,43 @@
+/* Scoped styles for the Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.brand a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.navLinks a {
+  color: white;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navLinks a:hover {
+  color: var(--color-secondary);
+}
+
+.supportBtn {
+  background-color: var(--color-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.supportBtn:hover {
+  background-color: #d05303;
+  color: white !important;
+}
