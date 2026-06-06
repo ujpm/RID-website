@@ -4,19 +4,15 @@
  */
 import React from 'react';
 import Hero from '../components/ui/Hero';
+import ImpactSummary from '../components/ui/ImpactSummary';
+import ImpactMetrics from '../components/ui/ImpactMetrics';
 
 export default function Home() {
   return (
     <div>
       <Hero />
-      
-      {/* Future Section: Impact Summary */}
-      <section style={{ padding: '4rem 5%', textAlign: 'center' }}>
-        <h2>Our Impact</h2>
-        <p style={{ marginTop: '1rem', color: 'var(--color-text)' }}>
-          Impact summary component will be integrated here.
-        </p>
-      </section>
+      <ImpactSummary />
+      <ImpactMetrics />
 
       {/* Future Section: Testimonials */}
       <section style={{ padding: '4rem 5%', backgroundColor: 'white', textAlign: 'center' }}>

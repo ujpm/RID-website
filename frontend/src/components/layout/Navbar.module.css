@@ -6,12 +6,21 @@
   padding: 1rem 5%;
   background-color: var(--color-primary);
   color: white;
+  position: relative; /* Essential for mobile dropdown positioning */
 }
 
 .brand a {
   font-size: 1.5rem;
   font-weight: bold;
   color: white;
+}
+
+/* Hamburger Icon (Hidden on Desktop) */
+.hamburger {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  user-select: none;
 }
 
 .navLinks {
@@ -40,4 +49,32 @@
 .supportBtn:hover {
   background-color: #d05303;
   color: white !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .navLinks {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-primary);
+    flex-direction: column;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* When 'active' class is appended, expand the menu */
+  .navLinks.active {
+    max-height: 400px;
+    padding: 1rem 0;
+  }
 }

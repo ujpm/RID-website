@@ -11,7 +11,7 @@ export default function Hero() {
     <section className={styles.hero}>
       <div className={styles.heroContent}>
         <h1 className={styles.title}>
-          Empowering Rwandan Youth to Lead Through Research and Innovation
+          Empowering Young People to Lead Through Research and Innovation
         </h1>
         <p className={styles.subtitle}>
           We are a youth-led movement transforming our peers into leaders and problem-solvers.
