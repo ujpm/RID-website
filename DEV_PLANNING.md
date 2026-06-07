@@ -31,8 +31,8 @@ This document serves as our internal "brain" and progress tracker for building t
 - [x] Phase 1: Define Information Architecture & Narrative
 - [x] Phase 2: Agree on Tech Stack (React, Vite, Router, CSS Modules)
 - [x] Phase 3: Setup Full-Stack TypeScript Architecture (`frontend` and `backend`)
-- [ ] Phase 4: Wire up React Router in `frontend/src/App.tsx`
-- [ ] Phase 5: Setup Global CSS and Color Variables in `frontend`
+- [x] Phase 4: Wire up React Router in `frontend/src/App.tsx`
+- [x] Phase 5: Setup Global CSS and Color Variables in `frontend`
 - [ ] Phase 6: Build Basic Express Server & MongoDB Connection in `backend`
-- [ ] Phase 7: Build Layout Components (`Navbar.tsx`, `Footer.tsx`)
+- [x] Phase 7: Build Layout Components (`Navbar.tsx`, `Footer.tsx`)
 - [ ] Phase 8: Build Page Shells
