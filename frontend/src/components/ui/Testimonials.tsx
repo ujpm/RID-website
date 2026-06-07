@@ -3,7 +3,7 @@
  * Features a UVU Bio-inspired card layout with an overlapping profile picture,
  * corner country flags, and an auto-scrolling 3-slide carousel.
  */
-
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
@@ -15,64 +15,64 @@ const testimonialsData = [
   { 
     id: 1, 
     name: "Amira Elamin", 
-    role: "Clinical Researcher", 
+    role: "Student", 
     country: "Sudan",
-    quote: "The masterclasses completely transformed how I approach data analysis in resource-limited settings.",
-    avatar: "/images/team/sudan.jpg",
+    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    avatar: "/images/team/1.jpg",
     flag: "/images/flags/sd.png"
   },
   { 
     id: 2, 
     name: "Mabior Deng", 
-    role: "Public Health Advocate", 
+    role: "Student", 
     country: "South Sudan",
-    quote: "RID gave me the network and confidence to lead community health initiatives across borders.",
-    avatar: "/images/team/south-sudan.jpg",
+    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    avatar: "/images/team/1.jpg",
     flag: "/images/flags/ss.png"
   },
   { 
     id: 3, 
     name: "Claire Mutoni", 
-    role: "Bio-Innovation Fellow", 
+    role: "Student", 
     country: "Rwanda",
-    quote: "Having a dedicated community of young problem-solvers helped me turn my prototype into reality.",
-    avatar: "/images/team/rwanda.jpg",
+    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    avatar: "/images/team/1.jpg",
     flag: "/images/flags/rw.png"
   },
   { 
     id: 4, 
     name: "Samuel Ochieng", 
-    role: "Health Tech Developer", 
+    role: "Student", 
     country: "Kenya",
-    quote: "The mentorship hours provided a practical framework that I use in my development cycle daily.",
-    avatar: "/images/team/kenya.jpg",
+    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    avatar: "/images/team/1.jpg",
     flag: "/images/flags/ke.png"
   },
   { 
     id: 5, 
     name: "Fatime Mahamat", 
-    role: "Epidemiologist", 
+    role: "Student", 
     country: "Chad",
-    quote: "The cross-border collaboration fostered here is exactly what the African bioeconomy needs.",
-    avatar: "/images/team/chad.jpg",
+    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    avatar: "/images/team/1.jpg",
     flag: "/images/flags/td.png"
   },
   { 
     id: 6, 
     name: "Josephine Kollie", 
-    role: "Laboratory Technician", 
+    role: "Student", 
     country: "Liberia",
-    quote: "I was able to scale my laboratory skills exponentially thanks to the rigorous training programs.",
-    avatar: "/images/team/liberia.jpg",
+    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    avatar: "/images/team/1.jpg",
     flag: "/images/flags/lr.png"
   },
   { 
     id: 7, 
     name: "Oluwaseun Adeyemi", 
-    role: "Biomedical Engineer", 
+    role: "Student", 
     country: "Nigeria",
-    quote: "This is more than an association; it is an ecosystem that breeds excellence and innovation.",
-    avatar: "/images/team/nigeria.jpg",
+    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    avatar: "/images/team/1.jpg",
     flag: "/images/flags/ng.png"
   }
 ];

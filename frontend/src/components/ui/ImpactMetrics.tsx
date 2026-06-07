@@ -11,7 +11,7 @@ const metricsData = [
   { id: 2, icon: <GraduationCap size={28} />, number: '15+', label: 'Masterclass Sessions' },
   { id: 3, icon: <Lightbulb size={28} />, number: '5+', label: 'Innovations Supported' },
   { id: 4, icon: <Globe size={28} />, number: '5+', label: 'Countries Represented' },
-  { id: 5, icon: <Clock size={28} />, number: '10,000+', label: 'Mentorship Hours' }
+  { id: 5, icon: <Clock size={28} />, number: '100+', label: 'Mentorship Hours' }
 ];
 
 export default function ImpactMetrics() {
