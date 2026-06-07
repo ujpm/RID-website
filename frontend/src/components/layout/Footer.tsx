@@ -65,6 +65,7 @@ export default function Footer() {
             <h4 className={styles.columnTitle}>Quick Links</h4>
             <Link to="/" className={styles.linkItem}>Home</Link>
             <Link to="/programs" className={styles.linkItem}>Programs</Link>
+            <Link to="/admin" className={styles.linkItem}>Admin Access</Link>
             <Link to="/impact" className={styles.linkItem}>Impact</Link>
             <Link to="/research" className={styles.linkItem}>Research</Link>
           </div>
@@ -74,11 +75,11 @@ export default function Footer() {
             <h4 className={styles.columnTitle}>Contact Us</h4>
             <div className={styles.contactItem}>
               <MapPin size={18} />
-              <span>Kigali, Rwanda</span>
+              <span>Musanze, Rwanda</span>
             </div>
             <div className={styles.contactItem}>
               <Mail size={18} />
-              <span>contact@rid.rw</span>
+              <span>contact@weare-rid.xyz</span>
             </div>
           </div>
 

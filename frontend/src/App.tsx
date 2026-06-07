@@ -2,6 +2,9 @@
  * Root Application Component & Router Configuration
  */
 import { Routes, Route } from 'react-router-dom';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminUpdates from './pages/AdminUpdates';
 
 // Layout Imports
 import Navbar from './components/layout/Navbar';
@@ -29,7 +32,10 @@ export default function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/updates" element={<Updates />} />
           <Route path="/support" element={<Support />} />
-        </Routes>
+          <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/updates" element={<AdminUpdates />} />
+      </Routes>
       </main>
       <Footer />
     </div>

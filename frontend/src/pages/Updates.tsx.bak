@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 /**
  * Updates Page Component (News & Blog)
  * UI Mockup prepared for backend API integration.
@@ -12,43 +11,7 @@ const updatesData = [
   { id: 3, date: "Aug 15, 2026", title: "New Mentorship Cohort Opens", excerpt: "Applications are now open for our latest youth bio-innovation masterclass series.", image: "/images/impact-research.jpg" }
 ];
 
-
-// Strict type matching our backend model
-interface IUpdate {
-  _id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  imageUrl: string;
-  publishedDate: string;
-}
-
 export default function Updates() {
-  const [updates, setUpdates] = useState<IUpdate[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchUpdates = async () => {
-      try {
-        const response = await fetch('/api/updates');
-        const json = await response.json();
-
-        if (json.success) {
-          setUpdates(json.data);
-        } else {
-          setError(json.error);
-        }
-      } catch (err) {
-        setError('Failed to connect to the server.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUpdates();
-  }, []);
-
   return (
     <div className={styles.pageContainer}>
       <header className={styles.hero}>
