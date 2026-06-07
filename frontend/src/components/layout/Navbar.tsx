@@ -2,7 +2,7 @@
  * Navigation Bar Component
  * Provides links to all main sections, with responsive mobile menu functionality.
  */
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 

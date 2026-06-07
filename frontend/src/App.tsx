@@ -1,7 +1,6 @@
 /**
  * Root Application Component & Router Configuration
  */
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // Layout Imports

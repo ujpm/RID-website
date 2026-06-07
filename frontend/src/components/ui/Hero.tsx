@@ -3,7 +3,6 @@
  * An immersive, auto-playing carousel featuring 3 dynamic slides, 
  * a gradient overlay, and a curved bottom edge.
  */
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';

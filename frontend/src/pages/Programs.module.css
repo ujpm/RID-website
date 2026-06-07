@@ -1,0 +1,18 @@
+/* Scoped styles for Programs Page */
+.pageContainer { background-color: var(--color-background); min-height: 100vh; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+
+.hero { background-color: var(--color-primary); padding: 8rem 5% 4rem; text-align: center; border-bottom: 4px solid var(--color-secondary); }
+.heroContent { max-width: 800px; margin: 0 auto; }
+.title { font-size: 3rem; font-weight: 800; margin-bottom: 1.5rem; color: white; }
+.subtitle { font-size: 1.2rem; line-height: 1.6; color: #cbd5e1; }
+
+.contentSection { padding: 5rem 0; }
+.programsGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+
+.programCard { background-color: white; border-radius: 12px; padding: 3rem 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; border: 1px solid #e2e8f0; }
+.programCard:hover { transform: translateY(-5px); box-shadow: 0 12px 20px rgba(0,0,0,0.1); border-color: var(--color-secondary); }
+
+.tag { display: inline-block; background-color: rgba(239, 108, 0, 0.1); color: var(--color-secondary); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
+.programTitle { font-size: 1.6rem; color: var(--color-primary); margin-bottom: 1rem; font-weight: 700; }
+.programDesc { line-height: 1.6; color: #64748b; font-size: 1rem; }

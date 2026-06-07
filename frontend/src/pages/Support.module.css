@@ -1,0 +1,21 @@
+/* Scoped styles for Support Page */
+.pageContainer { background-color: var(--color-background); min-height: 100vh; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+
+.hero { background-color: var(--color-primary); color: white; padding: 8rem 5% 4rem; text-align: center; }
+.heroContent { max-width: 800px; margin: 0 auto; }
+.title { font-size: 3rem; font-weight: 800; margin-bottom: 1.5rem; color: white; }
+.subtitle { font-size: 1.2rem; line-height: 1.6; color: #cbd5e1; }
+
+.contentSection { padding: 5rem 0; }
+.actionGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+
+.actionCard { background-color: white; border-radius: 12px; padding: 4rem 2rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 2px solid transparent; transition: border-color 0.3s ease; }
+.actionCard:hover { border-color: var(--color-secondary); }
+
+.iconPlaceholder { font-size: 3rem; margin-bottom: 1.5rem; }
+.cardTitle { font-size: 1.8rem; color: var(--color-primary); margin-bottom: 1rem; font-weight: 700; }
+.cardDesc { line-height: 1.6; color: #64748b; margin-bottom: 2.5rem; font-size: 1.05rem; }
+
+.actionBtn { background-color: var(--color-secondary); color: white; border: none; padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; }
+.actionBtn:hover { background-color: #d05303; transform: translateY(-2px); }

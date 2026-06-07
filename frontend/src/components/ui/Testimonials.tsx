@@ -3,7 +3,6 @@
  * Features a UVU Bio-inspired card layout with an overlapping profile picture,
  * corner country flags, and an auto-scrolling 3-slide carousel.
  */
-import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
