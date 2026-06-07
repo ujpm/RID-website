@@ -6,6 +6,7 @@ import React from 'react';
 import Hero from '../components/ui/Hero';
 import ImpactSummary from '../components/ui/ImpactSummary';
 import ImpactMetrics from '../components/ui/ImpactMetrics';
+import Testimonials from '../components/ui/Testimonials';
 
 export default function Home() {
   return (
@@ -13,14 +14,7 @@ export default function Home() {
       <Hero />
       <ImpactSummary />
       <ImpactMetrics />
-
-      {/* Future Section: Testimonials */}
-      <section style={{ padding: '4rem 5%', backgroundColor: 'white', textAlign: 'center' }}>
-        <h2>What People Say</h2>
-        <p style={{ marginTop: '1rem', color: 'var(--color-text)' }}>
-          Testimonial slider component will be integrated here.
-        </p>
-      </section>
+      <Testimonials />
     </div>
   );
 }

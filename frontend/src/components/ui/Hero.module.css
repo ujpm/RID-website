@@ -1,30 +1,60 @@
 /* Scoped styles for the Hero Section */
-.hero {
-  background-color: var(--color-primary);
-  color: white;
-  padding: 6rem 5%;
-  text-align: center;
+.heroWrapper {
+  width: 100%;
+  position: relative;
+  /* Creates the rounded bottom edge */
+  border-radius: 0 0 50% 50% / 0 0 4vw 4vw;
+  overflow: hidden;
+  background-color: var(--color-primary); /* Fallback */
+  z-index: 1; /* Prevents overflow hiding issues */
+}
+
+.swiperContainer {
+  width: 100%;
+  height: 75vh;
+  min-height: 500px;
+}
+
+.slideBackground {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-color: #0f172a; /* Fallback color before images load */
+}
+
+/* The Gradient Overlay (Brand color at bottom fading up to transparent) */
+.overlay {
+  width: 100%;
+  height: 100%;
+  /* Using standard CSS linear-gradient to fade the primary color upwards */
+  background: linear-gradient(to top, var(--color-primary) 5%, rgba(15, 23, 42, 0.4) 60%, rgba(15, 23, 42, 0.1) 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60vh;
+  padding: 6rem 5%;
+  text-align: center;
 }
 
 .heroContent {
-  max-width: 800px;
+  max-width: 850px;
+  color: white;
+  margin-top: 4rem; /* Push content slightly down */
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 3rem;
+  font-weight: 800;
   margin-bottom: 1.5rem;
   line-height: 1.2;
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .subtitle {
   font-size: 1.25rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
+  margin-bottom: 2.5rem;
+  opacity: 0.95;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .ctaGroup {
@@ -37,21 +67,21 @@
 .primaryBtn {
   background-color: var(--color-secondary);
   color: white;
-  padding: 0.75rem 1.5rem;
+  padding: 0.85rem 1.75rem;
   border-radius: 4px;
   font-weight: 600;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .primaryBtn:hover {
-  background-color: #d05303; /* Darker orange for hover state */
-  color: white;
+  background-color: #d05303;
+  transform: translateY(-2px);
 }
 
 .secondaryBtn {
   background-color: transparent;
   color: white;
-  padding: 0.75rem 1.5rem;
+  padding: 0.85rem 1.75rem;
   border-radius: 4px;
   font-weight: 600;
   border: 2px solid white;
@@ -61,4 +91,25 @@
 .secondaryBtn:hover {
   background-color: white;
   color: var(--color-primary);
+}
+
+/* Custom Swiper Pagination Dots */
+:global(.swiper-pagination-bullet) {
+  background-color: white !important;
+  opacity: 0.5 !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+
+:global(.swiper-pagination-bullet-active) {
+  background-color: var(--color-secondary) !important;
+  opacity: 1 !important;
+  transform: scale(1.2);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .title { font-size: 2.2rem; }
+  .subtitle { font-size: 1.1rem; }
+  .heroWrapper { border-radius: 0 0 50% 50% / 0 0 6vw 6vw; }
 }

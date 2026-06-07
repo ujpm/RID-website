@@ -1,0 +1,151 @@
+/* Scoped styles for the Testimonials Section */
+.testimonialsSection {
+  background-color: white; /* Clean contrast after the dark metrics section */
+  padding: 6rem 5% 5rem;
+  color: var(--color-primary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.2rem;
+  color: var(--color-primary);
+  margin-bottom: 4rem;
+  font-weight: 800;
+}
+
+.swiperContainer {
+  padding-bottom: 3rem !important; 
+  padding-top: 3rem !important; 
+}
+
+/* Outline Card Design - Idle State */
+.card {
+  position: relative;
+  background-color: white;
+  border: 2px solid var(--color-primary); /* Navy border */
+  border-radius: 16px;
+  padding: 4rem 1.5rem 2rem; 
+  text-align: center;
+  transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+  height: 100%;
+  margin-top: 1.5rem; 
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card Design - Hover State (Fill Effect) */
+.card:hover {
+  background-color: var(--color-secondary); /* Fills with Orange */
+  border-color: var(--color-secondary);
+  transform: translateY(-5px);
+}
+
+/* Overlapping Avatar Badge - Idle State */
+.avatarBadge {
+  position: absolute;
+  top: -3rem; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6rem;
+  height: 6rem;
+  background-color: white;
+  border: 3px solid var(--color-primary); /* Navy border */
+  border-radius: 50%;
+  transition: border-color 0.4s ease, background-color 0.4s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Overlapping Avatar Badge - Hover State */
+.card:hover .avatarBadge {
+  border-color: white;
+  background-color: var(--color-secondary);
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #cbd5e1; 
+}
+
+.flagContainer {
+  position: absolute;
+  bottom: 0px;
+  right: -5px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.flagImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Typography - Idle State */
+.quote {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--color-primary); /* Navy text */
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  flex-grow: 1; 
+  transition: color 0.4s ease;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-secondary); /* Orange text */
+  margin-bottom: 0.25rem;
+  transition: color 0.4s ease;
+}
+
+.role {
+  font-size: 0.9rem;
+  color: #64748b; /* Slate grey */
+  margin: 0;
+  transition: color 0.4s ease;
+}
+
+/* Typography - Hover State (Turns white for contrast against Orange fill) */
+.card:hover .quote,
+.card:hover .name,
+.card:hover .role {
+  color: white;
+}
+
+:global(.swiper-pagination-bullet-active) {
+  background-color: var(--color-secondary) !important;
+}
+
+@media (max-width: 480px) {
+  .avatarBadge {
+    width: 5rem;
+    height: 5rem;
+    top: -2.5rem;
+  }
+  .quote {
+    font-size: 1rem;
+  }
+}

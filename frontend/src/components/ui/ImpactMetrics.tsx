@@ -1,7 +1,3 @@
-/**
- * Impact Metrics Component
- * Features bordered cards with overlapping icon badges that fill with brand color on hover.
- */
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
@@ -28,19 +24,13 @@ export default function ImpactMetrics() {
           slidesPerView={1}
           pagination={{ clickable: true }}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
-          breakpoints={{
-            480: { slidesPerView: 2 },
-            768: { slidesPerView: 3 },
-            1024: { slidesPerView: 4 },
-          }}
+          breakpoints={{ 480: { slidesPerView: 2 }, 768: { slidesPerView: 3 }, 1024: { slidesPerView: 4 } }}
           className={styles.swiperContainer}
         >
           {metricsData.map((metric) => (
             <SwiperSlide key={metric.id}>
               <div className={styles.metricCard}>
-                <div className={styles.badge}>
-                  {metric.icon}
-                </div>
+                <div className={styles.badge}>{metric.icon}</div>
                 <h3 className={styles.number}>{metric.number}</h3>
                 <p className={styles.label}>{metric.label}</p>
               </div>

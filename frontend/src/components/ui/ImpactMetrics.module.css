@@ -1,76 +1,26 @@
 /* Scoped styles for the Impact Metrics Section */
 .metricsSection {
   background-color: var(--color-primary);
-  padding: 6rem 5% 5rem; /* Extra top padding to account for the overlapping badges */
+  /* Reduced top padding because the gradient above now acts as visual spacing */
+  padding: 2rem 5% 5rem;
   color: white;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.swiperContainer {
-  padding-bottom: 3rem !important; 
-  padding-top: 2rem !important; /* Prevents badge clipping during swipe */
-}
+.container { max-width: 1200px; margin: 0 auto; }
+.swiperContainer { padding-bottom: 3rem !important; padding-top: 3rem !important; }
 
 /* Outline Card Design */
-.metricCard {
-  position: relative;
-  background-color: transparent;
-  border: 2px solid white;
-  border-radius: 16px;
-  padding: 3.5rem 1rem 2rem; /* Top padding leaves room for the badge */
-  text-align: center;
-  transition: background-color 0.4s ease, border-color 0.4s ease;
-  height: 100%;
-  margin-top: 1.5rem; /* Pushes card down so badge overlaps top edge */
-}
+.metricCard { position: relative; background-color: transparent; border: 2px solid white; border-radius: 16px; padding: 4rem 1rem 2rem; text-align: center; transition: background-color 0.4s ease, border-color 0.4s ease; height: 100%; margin-top: 1.5rem; }
 
 /* Overlapping Icon Badge */
-.badge {
-  position: absolute;
-  top: -2rem; /* Half of height to intersect border */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4rem;
-  height: 4rem;
-  background-color: var(--color-primary);
-  border: 2px solid white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white; /* Icon color */
-  transition: background-color 0.4s ease, border-color 0.4s ease;
-}
+.badge { position: absolute; top: -2rem; left: 50%; transform: translateX(-50%); width: 4rem; height: 4rem; background-color: var(--color-primary); border: 2px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; transition: background-color 0.4s ease, border-color 0.4s ease; z-index: 2; }
 
 /* Hover Fill Animation */
-.metricCard:hover {
-  background-color: var(--color-secondary);
-  border-color: var(--color-secondary);
-}
+.metricCard:hover { background-color: var(--color-secondary); border-color: var(--color-secondary); }
+.metricCard:hover .badge { background-color: var(--color-secondary); border-color: white; }
 
-.metricCard:hover .badge {
-  background-color: var(--color-secondary);
-  border-color: white;
-}
-
-.number {
-  font-size: 3rem;
-  font-weight: 800;
-  color: white;
-  margin-bottom: 0.5rem;
-  line-height: 1;
-}
-
-.label {
-  font-size: 1rem;
-  font-weight: 500;
-  opacity: 0.9;
-  letter-spacing: 0.5px;
-}
+.number { font-size: 3rem; font-weight: 800; color: white; margin-bottom: 0.5rem; line-height: 1; }
+.label { font-size: 1rem; font-weight: 500; opacity: 0.9; letter-spacing: 0.5px; }
 
 @media (max-width: 480px) {
   .number { font-size: 2.5rem; }
