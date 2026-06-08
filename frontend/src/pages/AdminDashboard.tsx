@@ -40,7 +40,7 @@ const AdminDashboard = () => {
         <div style={{ padding: '20px', border: '1px solid #ddd', borderRadius: '8px', textAlign: 'center' }}>
           <h3>Manage Gallery</h3>
           <p>Upload and organize images.</p>
-          <button style={{ padding: '10px', marginTop: '10px', backgroundColor: '#002147', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', opacity: 0.5 }}>Go to Gallery (Coming Soon)</button>
+          <button onClick={() => navigate('/admin/gallery')} style={{ padding: '10px', marginTop: '10px', backgroundColor: '#002147', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Go to Gallery</button>
         </div>
       </div>
     </div>

@@ -18,25 +18,24 @@ const AdminUpdates = () => {
   
   const [formData, setFormData] = useState({ title: '', excerpt: '', content: '' });
   const [imageFile, setImageFile] = useState<File | null>(null);
-  
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  // NEW: State to toggle the full post preview mode
   const [showPreview, setShowPreview] = useState(false);
+  
+  // NEW: State to track if we are editing an existing post
+  const [editingId, setEditingId] = useState<string | null>(null);
   
   const token = localStorage.getItem('rid_admin_token');
   const apiUrl = import.meta.env.VITE_API_URL || '/api';
 
   useEffect(() => {
-    if (!token) {
-      navigate('/admin');
-      return;
-    }
-    fetchUpdates();
+    if (!token) navigate('/admin');
+    else fetchUpdates();
   }, [navigate, token]);
 
   useEffect(() => {
     return () => {
-      if (previewUrl) URL.revokeObjectURL(previewUrl);
+      // Only revoke object URLs, not our actual Cloudinary URLs
+      if (previewUrl && previewUrl.startsWith('blob:')) URL.revokeObjectURL(previewUrl);
     };
   }, [previewUrl]);
 
@@ -47,9 +46,7 @@ const AdminUpdates = () => {
       if (json.success) setUpdates(json.data);
     } catch (err) {
       console.error('Failed to fetch updates.');
-    } finally {
-      setLoading(false);
-    }
+    } finally { setLoading(false); }
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,59 +56,75 @@ const AdminUpdates = () => {
       setPreviewUrl(URL.createObjectURL(file));
     } else {
       setImageFile(null);
-      setPreviewUrl(null);
+      if (!editingId) setPreviewUrl(null); // Keep preview if editing and they cancel file dialog
     }
   };
 
-  const handleCreate = async (e?: React.FormEvent) => {
+  // NEW: Load existing data into form
+  const handleEditClick = (update: IUpdate) => {
+    setEditingId(update._id);
+    setFormData({ title: update.title, excerpt: update.excerpt, content: update.content });
+    setPreviewUrl(update.imageUrl);
+    setImageFile(null); // Clear any pending local file
+    setShowPreview(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const resetForm = () => {
+    setEditingId(null);
+    setFormData({ title: '', excerpt: '', content: '' });
+    setImageFile(null);
+    setPreviewUrl(null);
+    setShowPreview(false);
+    const fileInput = document.getElementById('image-upload') as HTMLInputElement;
+    if (fileInput) fileInput.value = '';
+  };
+
+  const handleSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (!imageFile) {
+    if (!imageFile && !editingId) {
       alert('Please select an image file to upload.');
       return;
     }
 
     setUploading(true);
+    let finalImageUrl = previewUrl; // Default to existing URL if editing
 
     try {
-      const uploadData = new FormData();
-      uploadData.append('image', imageFile);
+      // Only upload to Cloudinary if they selected a NEW file
+      if (imageFile) {
+        const uploadData = new FormData();
+        uploadData.append('image', imageFile);
 
-      const uploadRes = await fetch(`${apiUrl}/upload`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}` },
-        body: uploadData
-      });
-      const uploadJson = await uploadRes.json();
+        const uploadRes = await fetch(`${apiUrl}/upload`, {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${token}` },
+          body: uploadData
+        });
+        const uploadJson = await uploadRes.json();
+        if (!uploadJson.success) throw new Error(uploadJson.error || 'Image upload failed.');
+        finalImageUrl = uploadJson.data.url;
+      }
 
-      if (!uploadJson.success) throw new Error(uploadJson.error || 'Image upload failed.');
+      // Determine Method and URL
+      const method = editingId ? 'PUT' : 'POST';
+      const endpoint = editingId ? `${apiUrl}/updates/${editingId}` : `${apiUrl}/updates`;
 
-      const imageUrl = uploadJson.data.url;
-
-      const postRes = await fetch(`${apiUrl}/updates`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ ...formData, imageUrl })
+      const postRes = await fetch(endpoint, {
+        method: method,
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ ...formData, imageUrl: finalImageUrl })
       });
       const postJson = await postRes.json();
 
       if (postJson.success) {
-        setFormData({ title: '', excerpt: '', content: '' });
-        setImageFile(null);
-        setPreviewUrl(null);
-        setShowPreview(false); // Reset preview mode
-        
-        const fileInput = document.getElementById('image-upload') as HTMLInputElement;
-        if (fileInput) fileInput.value = '';
-        
+        resetForm();
         fetchUpdates();
       } else {
         alert(postJson.error);
       }
     } catch (err: any) {
-      alert(err.message || 'Failed to publish update.');
+      alert(err.message || 'Failed to save update.');
     } finally {
       setUploading(false);
     }
@@ -127,9 +140,7 @@ const AdminUpdates = () => {
       const json = await res.json();
       if (json.success) fetchUpdates();
       else alert(json.error);
-    } catch (err) {
-      alert('Failed to delete update.');
-    }
+    } catch (err) { alert('Failed to delete update.'); }
   };
 
   return (
@@ -139,65 +150,70 @@ const AdminUpdates = () => {
         <button onClick={() => navigate('/admin/dashboard')} style={{ padding: '8px 15px', cursor: 'pointer' }}>Back to Dashboard</button>
       </div>
 
-      <div style={{ backgroundColor: '#f9f9f9', padding: '20px', borderRadius: '8px', marginBottom: '40px' }}>
+      <div style={{ backgroundColor: '#f9f9f9', padding: '20px', borderRadius: '8px', marginBottom: '40px', border: editingId ? '2px solid #f39c12' : 'none' }}>
         
-        {/* EDIT MODE */}
         {!showPreview ? (
           <>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h3>Create New Update</h3>
-              <button 
-                type="button" 
-                onClick={() => {
-                  if (!formData.title || !imageFile) return alert('Please add a title and image to preview.');
+              <h3 style={{ color: editingId ? '#f39c12' : 'inherit' }}>
+                {editingId ? '✏️ Editing Post' : 'Create New Update'}
+              </h3>
+              <div>
+                {editingId && (
+                  <button type="button" onClick={resetForm} style={{ marginRight: '10px', padding: '8px 15px', backgroundColor: '#ccc', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Cancel Edit</button>
+                )}
+                <button type="button" onClick={() => {
+                  if (!formData.title || (!imageFile && !previewUrl)) return alert('Please add a title and image to preview.');
                   setShowPreview(true);
-                }} 
-                style={{ padding: '8px 15px', backgroundColor: '#f39c12', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-              >
-                👀 Preview Post
-              </button>
+                }} style={{ padding: '8px 15px', backgroundColor: '#f39c12', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+                  👀 Preview Post
+                </button>
+              </div>
             </div>
 
-            <form onSubmit={handleCreate} style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '15px' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '15px' }}>
               <input type="text" placeholder="Title" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} required style={{ padding: '10px' }} />
               <input type="text" placeholder="Excerpt (Short summary)" value={formData.excerpt} onChange={(e) => setFormData({...formData, excerpt: e.target.value})} required style={{ padding: '10px' }} />
               <textarea placeholder="Full Content" value={formData.content} onChange={(e) => setFormData({...formData, content: e.target.value})} required rows={5} style={{ padding: '10px', resize: 'vertical' }} />
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '15px', border: '1px dashed #ccc', borderRadius: '5px', backgroundColor: '#fff' }}>
-                <label htmlFor="image-upload" style={{ fontWeight: 'bold', fontSize: '0.9em' }}>Upload Cover Image:</label>
-                <input id="image-upload" type="file" accept="image/*" onChange={handleImageChange} required />
+                <label htmlFor="image-upload" style={{ fontWeight: 'bold', fontSize: '0.9em' }}>
+                  {editingId ? 'Change Cover Image (Optional):' : 'Upload Cover Image:'}
+                </label>
+                <input id="image-upload" type="file" accept="image/*" onChange={handleImageChange} required={!editingId} />
+                
+                {previewUrl && (
+                  <div style={{ marginTop: '10px' }}>
+                    <p style={{ fontSize: '0.85em', color: '#666', marginBottom: '5px' }}>Image Preview:</p>
+                    <img src={previewUrl} alt="Preview" style={{ width: '100%', maxWidth: '300px', height: 'auto', borderRadius: '4px', objectFit: 'cover', border: '1px solid #ddd' }} />
+                  </div>
+                )}
               </div>
 
-              <button type="submit" disabled={uploading} style={{ padding: '12px', backgroundColor: '#002147', color: 'white', border: 'none', borderRadius: '4px', cursor: uploading ? 'not-allowed' : 'pointer', fontSize: '1.05em' }}>
-                {uploading ? 'Publishing...' : '🚀 Publish Directly'}
+              <button type="submit" disabled={uploading} style={{ padding: '12px', backgroundColor: editingId ? '#27ae60' : '#002147', color: 'white', border: 'none', borderRadius: '4px', cursor: uploading ? 'not-allowed' : 'pointer', fontSize: '1.05em' }}>
+                {uploading ? 'Saving...' : (editingId ? '✅ Update Post' : '🚀 Publish Directly')}
               </button>
             </form>
           </>
         ) : (
-          /* PREVIEW MODE */
+          /* PREVIEW MODE (Remains unchanged visually, updated logic) */
           <div style={{ padding: '20px', border: '2px solid #002147', borderRadius: '8px', backgroundColor: '#fff' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid #ddd', paddingBottom: '10px' }}>
               <h3 style={{ margin: 0, color: '#f39c12' }}>Live Preview Mode</h3>
               <button onClick={() => setShowPreview(false)} style={{ padding: '5px 10px', cursor: 'pointer' }}>✏️ Back to Edit</button>
             </div>
             
-            {/* Mockup of how the post will look */}
             <article style={{ fontFamily: 'sans-serif' }}>
               {previewUrl && <img src={previewUrl} alt="Preview" style={{ width: '100%', height: '300px', objectFit: 'cover', borderRadius: '8px', marginBottom: '20px' }} />}
               <h1 style={{ color: '#002147', marginBottom: '10px' }}>{formData.title}</h1>
-              <p style={{ color: '#666', fontSize: '0.9em', marginBottom: '20px' }}>Published: {new Date().toLocaleDateString()}</p>
-              <p style={{ fontSize: '1.2em', fontWeight: 'bold', color: '#333', marginBottom: '20px', borderLeft: '4px solid #f39c12', paddingLeft: '10px' }}>
-                {formData.excerpt}
-              </p>
-              <div style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6', color: '#444' }}>
-                {formData.content}
-              </div>
+              <p style={{ fontSize: '1.2em', fontWeight: 'bold', color: '#333', marginBottom: '20px', borderLeft: '4px solid #f39c12', paddingLeft: '10px' }}>{formData.excerpt}</p>
+              <div style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6', color: '#444' }}>{formData.content}</div>
             </article>
 
             <div style={{ marginTop: '30px', paddingTop: '20px', borderTop: '1px solid #ddd', display: 'flex', justifyContent: 'flex-end', gap: '15px' }}>
               <button onClick={() => setShowPreview(false)} style={{ padding: '10px 20px', backgroundColor: '#ccc', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Cancel</button>
-              <button onClick={() => handleCreate()} disabled={uploading} style={{ padding: '10px 20px', backgroundColor: '#27ae60', color: 'white', border: 'none', borderRadius: '4px', cursor: uploading ? 'not-allowed' : 'pointer', fontWeight: 'bold' }}>
-                {uploading ? 'Publishing...' : '✅ Confirm & Publish'}
+              <button onClick={() => handleSubmit()} disabled={uploading} style={{ padding: '10px 20px', backgroundColor: '#27ae60', color: 'white', border: 'none', borderRadius: '4px', cursor: uploading ? 'not-allowed' : 'pointer', fontWeight: 'bold' }}>
+                {uploading ? 'Saving...' : (editingId ? '✅ Confirm Update' : '✅ Confirm & Publish')}
               </button>
             </div>
           </div>
@@ -216,7 +232,10 @@ const AdminUpdates = () => {
                   <p style={{ margin: '5px 0', fontSize: '0.9em', color: '#555' }}>{new Date(update.publishedDate).toLocaleDateString()}</p>
                 </div>
               </div>
-              <button onClick={() => handleDelete(update._id)} style={{ backgroundColor: '#e74c3c', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '4px', cursor: 'pointer', height: 'fit-content' }}>Delete</button>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button onClick={() => handleEditClick(update)} style={{ backgroundColor: '#f39c12', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '4px', cursor: 'pointer', height: 'fit-content' }}>Edit</button>
+                <button onClick={() => handleDelete(update._id)} style={{ backgroundColor: '#e74c3c', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '4px', cursor: 'pointer', height: 'fit-content' }}>Delete</button>
+              </div>
             </li>
           ))}
           {updates.length === 0 && <p>No updates found.</p>}
