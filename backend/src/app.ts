@@ -10,7 +10,10 @@ import metricRoutes from './routes/metricRoutes';
 const app: Application = express();
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'https://musical-meme-x599q44xq6xcpwxp-5173.app.github.dev',
+  origin: [
+    process.env.CLIENT_URL || 'https://musical-meme-x599q44xq6xcpwxp-5173.app.github.dev',
+    'https://rid-frontend-9t6.pages.dev'
+  ],
   credentials: true
 }));
 
