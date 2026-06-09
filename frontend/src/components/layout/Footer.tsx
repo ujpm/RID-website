@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { Mail, MapPin } from 'lucide-react';
 import styles from './Footer.module.css';
 
-// Lightweight inline SVGs replacing removed lucide-react brand icons
+
 const LinkedInIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
@@ -53,7 +53,17 @@ export default function Footer() {
           
           {/* Column 1: Brand & Mission */}
           <div className={styles.brand}>
-            <h3 className={styles.brandName}>RID</h3>
+            <Link to="/" style={{ textDecoration: 'none', display: 'inline-block', marginBottom: '15px' }}>
+              <img
+                src="/images/logo-1-bg.png"
+                alt="RID Logo"
+                style={{ height: '45px', width: 'auto', filter: 'brightness(0) invert(1)' }} 
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.parentElement!.innerHTML = '<h3 class="' + styles.brandName + '">RID</h3>';
+                }}
+              />
+            </Link>
             <p className={styles.brandDesc}>
               Empowering the next generation of African innovators through research, 
               leadership, and tangible real-world solutions.
@@ -87,9 +97,28 @@ export default function Footer() {
 
         {/* Bottom Bar: Copyright & Socials */}
         <div className={styles.bottomBar}>
-          <p className={styles.copyright}>
-            © {new Date().getFullYear()} Research and Innovation for Development. All rights reserved.
-          </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '15px', flexWrap: 'wrap' }}>
+            <p className={styles.copyright} style={{ margin: 0 }}>
+              © {new Date().getFullYear()} Research and Innovation for Development. All rights reserved.
+            </p>
+            <a 
+              href="https://ijean.xyz" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ 
+                fontSize: '0.85em', 
+                color: '#888', 
+                textDecoration: 'none', 
+                fontFamily: 'monospace', 
+                letterSpacing: '0.5px', 
+                transition: 'color 0.2s ease' 
+              }} 
+              onMouseOver={e => e.currentTarget.style.color = '#f39c12'} 
+              onMouseOut={e => e.currentTarget.style.color = '#888'}
+            >
+              dev:JP
+            </a>
+          </div>
           <div className={styles.socialIcons}>
             <a href="#" aria-label="LinkedIn"><LinkedInIcon /></a>
             <a href="#" aria-label="Twitter"><TwitterIcon /></a>
