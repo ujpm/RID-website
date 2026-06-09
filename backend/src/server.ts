@@ -15,7 +15,9 @@ const startServer = async (): Promise<void> => {
   await connectDB();
 
   // Begin listening loops
-  app.listen(PORT, () => {
+  app.get('/api/health', (req, res) => res.status(200).json({ status: 'ok', message: 'RID Backend is awake' }));
+
+app.listen(PORT, () => {
     console.log(`[Server] Core running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
   });
 };
