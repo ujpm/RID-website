@@ -5,6 +5,7 @@ import updateRoutes from './routes/updateRoutes';
 import authRoutes from './routes/authRoutes';
 import uploadRoutes from './routes/uploadRoutes';
 import galleryRoutes from './routes/galleryRoutes';
+import metricRoutes from './routes/metricRoutes';
 
 const app: Application = express();
 
@@ -20,6 +21,7 @@ app.use('/api/updates', updateRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/gallery', galleryRoutes);
+app.use('/api/metrics', metricRoutes);
 
 app.get('/api/health', (req: Request, res: Response) => {
   res.status(200).json({

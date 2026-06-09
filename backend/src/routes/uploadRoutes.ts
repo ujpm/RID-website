@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { uploadImage } from '../controllers/uploadController';
+import { uploadImage, uploadBulkImages } from '../controllers/uploadController';
 import { protect } from '../middleware/authMiddleware';
 import { upload } from '../config/cloudinary';
 
 const router = Router();
 
-// Protect ensures only admins can upload. 
-// upload.single('image') parses the incoming form-data for a field named 'image'.
 router.post('/', protect, upload.single('image'), uploadImage);
+// NEW: Bulk upload route utilizing multer's array feature (max 20 files per request)
+router.post('/bulk', protect, upload.array('images', 20), uploadBulkImages);
 
 export default router;

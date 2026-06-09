@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Users, GraduationCap, Lightbulb, Globe, Clock } from 'lucide-react';
@@ -5,15 +6,40 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import styles from './ImpactMetrics.module.css';
 
-const metricsData = [
-  { id: 1, icon: <Users size={28} />, number: '100+', label: 'Young People Reached' },
-  { id: 2, icon: <GraduationCap size={28} />, number: '15+', label: 'Masterclass Sessions' },
+// The hardcoded source of truth for labels and icons to protect the UI
+const baseMetrics = [
+  { id: '1', icon: <Users size={28} />, number: '100+', label: 'Young People Reached' },
+  { id: '2', icon: <GraduationCap size={28} />, number: '15+', label: 'Masterclass Sessions' },
   { id: 3, icon: <Lightbulb size={28} />, number: '5+', label: 'Innovations Supported' },
   { id: 4, icon: <Globe size={28} />, number: '5+', label: 'Countries Represented' },
   { id: 5, icon: <Clock size={28} />, number: '100+', label: 'Mentorship Hours' }
 ];
 
 export default function ImpactMetrics() {
+  const [metricsData, setMetricsData] = useState(baseMetrics);
+
+  useEffect(() => {
+    const fetchLiveNumbers = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || '/api';
+        const res = await fetch(`${apiUrl}/metrics`);
+        const json = await res.json();
+        
+        if (json.success && json.data.length > 0) {
+          // Merge live numbers with our protected base metrics based on matching labels
+          const merged = baseMetrics.map(base => {
+            const liveMatch = json.data.find((m: any) => m.label === base.label);
+            return liveMatch ? { ...base, number: liveMatch.value } : base;
+          });
+          setMetricsData(merged);
+        }
+      } catch (err) {
+        console.error('Failed to fetch metrics, using defaults.');
+      }
+    };
+    fetchLiveNumbers();
+  }, []);
+
   return (
     <section className={styles.metricsSection}>
       <div className={styles.container}>
@@ -27,7 +53,7 @@ export default function ImpactMetrics() {
           className={styles.swiperContainer}
         >
           {metricsData.map((metric) => (
-            <SwiperSlide key={metric.id}>
+            <SwiperSlide key={metric.label}>
               <div className={styles.metricCard}>
                 <div className={styles.badge}>{metric.icon}</div>
                 <h3 className={styles.number}>{metric.number}</h3>

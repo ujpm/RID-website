@@ -1,82 +1,51 @@
-import { useEffect, useState } from 'react';
-/**
- * Updates Page Component (News & Blog)
- * UI Mockup prepared for backend API integration.
- */
-import styles from './Updates.module.css';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-// Dummy data structure reflecting future API payload
-const updatesData = [
-  { id: 1, date: "Oct 12, 2026", title: "RID Officially Registers as Non-Profit", excerpt: "A major milestone for our operational framework and national partnerships.", image: "/images/impact-leadership.jpg" },
-  { id: 2, date: "Sep 28, 2026", title: "Smart Glove Ranks 6th Nationally", excerpt: "Our assistive technology project gains recognition at the ALX Rwanda innovation competition.", image: "/images/impact-innovation.jpg" },
-  { id: 3, date: "Aug 15, 2026", title: "New Mentorship Cohort Opens", excerpt: "Applications are now open for our latest youth bio-innovation masterclass series.", image: "/images/impact-research.jpg" }
-];
-
-
-// Strict type matching our backend model
-interface IUpdate {
-  _id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  imageUrl: string;
-  publishedDate: string;
-}
-
-export default function Updates() {
-  const [updates, setUpdates] = useState<IUpdate[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+const Updates = () => {
+  const navigate = useNavigate();
+  const [updates, setUpdates] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUpdates = async () => {
       try {
-        const response = await fetch('/api/updates');
-        const json = await response.json();
-
-        if (json.success) {
-          setUpdates(json.data);
-        } else {
-          setError(json.error);
-        }
-      } catch (err) {
-        setError('Failed to connect to the server.');
-      } finally {
-        setLoading(false);
-      }
+        const res = await fetch(`${import.meta.env.VITE_API_URL || '/api'}/updates`);
+        const json = await res.json();
+        if (json.success) setUpdates(json.data);
+      } catch (error) {} finally { setLoading(false); }
     };
-
     fetchUpdates();
   }, []);
 
   return (
-    <div className={styles.pageContainer}>
-      <header className={styles.hero}>
-        <div className={styles.heroContent}>
-          <h1 className={styles.title}>News & Updates</h1>
-          <p className={styles.subtitle}>Stay informed on our latest projects, partnerships, and community milestones.</p>
-        </div>
+    <div style={{ padding: '60px 20px', maxWidth: '1100px', margin: '0 auto' }}>
+      <header style={{ textAlign: 'center', marginBottom: '60px' }}>
+        <h1 style={{ fontSize: '3em', color: '#002147', marginBottom: '10px' }}>Latest Updates & News</h1>
+        <p style={{ fontSize: '1.2em', color: '#666' }}>Stay informed about our recent activities and impact.</p>
       </header>
 
-      <section className={styles.newsSection}>
-        <div className={styles.container}>
-          <div className={styles.newsGrid}>
-            {updatesData.map((article) => (
-              <article key={article.id} className={styles.newsCard}>
-                <div className={styles.imageWrapper}>
-                  <img src={article.image} alt={article.title} />
-                </div>
-                <div className={styles.cardContent}>
-                  <span className={styles.date}>{article.date}</span>
-                  <h2 className={styles.articleTitle}>{article.title}</h2>
-                  <p className={styles.excerpt}>{article.excerpt}</p>
-                  <a href="#" className={styles.readMore}>Read Full Article &rarr;</a>
-                </div>
-              </article>
-            ))}
-          </div>
+      {loading ? <p style={{ textAlign: 'center' }}>Loading news...</p> : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '60px' }}>
+          {updates.map((update, index) => (
+            // Z-Pattern Logic: Even index = standard, Odd index = row-reverse
+            <div key={update._id} style={{ display: 'flex', flexDirection: index % 2 !== 0 ? 'row-reverse' : 'row', flexWrap: 'wrap', gap: '40px', alignItems: 'center' }}>
+              
+              <div style={{ flex: '1 1 400px' }}>
+                <img src={update.imageUrl} alt={update.title} style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }} />
+              </div>
+              
+              <div style={{ flex: '1 1 400px', padding: '20px 0' }}>
+                <span style={{ color: '#888', textTransform: 'uppercase', fontSize: '0.9em', fontWeight: 'bold' }}>{new Date(update.publishedDate).toLocaleDateString()}</span>
+                <h2 style={{ fontSize: '2.2em', color: '#002147', margin: '15px 0' }}>{update.title}</h2>
+                <p style={{ fontSize: '1.1em', color: '#555', lineHeight: '1.7', marginBottom: '25px' }}>{update.excerpt}</p>
+                <button onClick={() => navigate(`/updates/${update.slug || update._id}`)} style={{ padding: '12px 25px', backgroundColor: '#f39c12', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', fontSize: '1em' }}>Read Full Article &rarr;</button>
+              </div>
+
+            </div>
+          ))}
         </div>
-      </section>
+      )}
     </div>
   );
-}
+};
+export default Updates;
