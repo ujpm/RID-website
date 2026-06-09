@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState, ReactNode } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './Programs.module.css';
 
 // 1. Reusable Animation Wrapper Component
 const FadeInSection = ({ children, delay = 0 }: { children: ReactNode, delay?: number }) => {
