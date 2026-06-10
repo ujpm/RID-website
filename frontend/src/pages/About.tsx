@@ -15,20 +15,20 @@ const loremBio = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed d
 
 // Leadership data
 const teamData = [
-  { id: 1, name: "Placeholder Name 1", role: "President", image: "/images/team/1.jpg", bio: loremBio, email: "president@rid.rw", linkedin: "#" },
-  { id: 2, name: "Placeholder Name 2", role: "Vice-President", image: "/images/team/1.jpg", bio: loremBio, email: "vp@rid.rw", linkedin: "#" },
-  { id: 3, name: "Placeholder Name 3", role: "Secretary", image: "/images/team/1.jpg", bio: loremBio, email: "secretary@rid.rw", linkedin: "#" },
-  { id: 4, name: "Placeholder Name 4", role: "Treasurer", image: "/images/team/1.jpg", bio: loremBio, email: "treasurer@rid.rw", linkedin: "#" },
-  { id: 5, name: "Placeholder Name 5", role: "Research & Innovation", image: "/images/team/1.jpg", bio: loremBio, email: "research@rid.rw", linkedin: "#" },
-  { id: 6, name: "Placeholder Name 6", role: "Youth Dev & Capacity", image: "/images/team/1.jpg", bio: loremBio, email: "youth@rid.rw", linkedin: "#" },
-  { id: 7, name: "Placeholder Name 7", role: "Executive Director", image: "/images/team/1.jpg", bio: loremBio, email: "director@rid.rw", linkedin: "#" }
+  { id: 1, name: "M. Shomen Abdaljabar", role: "President", image: "/images/team/1.jpg", bio: loremBio, email: "president@rid.rw", linkedin: "#" },
+  { id: 2, name: "Teta Erssie", role: "Vice-President", image: "/images/team/1.jpg", bio: loremBio, email: "vp@rid.rw", linkedin: "#" },
+  { id: 3, name: "Methode Emmanuel Ihirwe", role: "Secretary", image: "/images/team/1.jpg", bio: loremBio, email: "secretary@rid.rw", linkedin: "#" },
+  { id: 4, name: "Mudatenguha leonce", role: "Treasurer", image: "/images/team/1.jpg", bio: loremBio, email: "treasurer@rid.rw", linkedin: "#" },
+  { id: 5, name: "UWIZEYIMANA Jean Pierre", role: "Research & Innovation", image: "/images/team/1.jpg", bio: loremBio, email: "research@rid.rw", linkedin: "#" },
+  { id: 6, name: "Stella Fideline NIYONKURU", role: "Youth Dev & Capacity", image: "/images/team/1.jpg", bio: loremBio, email: "youth@rid.rw", linkedin: "#" },
+  { id: 7, name: "Mousa Suliman", role: "Executive Director", image: "/images/team/1.jpg", bio: loremBio, email: "director@rid.rw", linkedin: "#" }
 ];
 
 // Board of Advisors data
 const advisorsData = [
   { id: 1, name: "Prof. Samson A. Oyebadejo", role: "Board of Advisors", image: "/images/team/1.jpg", bio: loremBio, email: "advisor1@rid.rw", linkedin: "#" },
-  { id: 2, name: "Dr. some/noone", role: "Board of Advisors", image: "/images/team/1.jpg", bio: loremBio, email: "advisor2@rid.rw", linkedin: "#" },
-  { id: 3, name: "Mr. some/noone", role: "Board of Advisors", image: "/images/team/1.jpg", bio: loremBio, email: "advisor3@rid.rw", linkedin: "#" }
+  { id: 2, name: "Mr. Willian NIYONZIMA", role: "Board of Advisors", image: "/images/team/1.jpg", bio: loremBio, email: "advisor2@rid.rw", linkedin: "#" },
+  { id: 3, name: "Mr. Clement MUNYENTWARI", role: "Board of Advisors", image: "/images/team/1.jpg", bio: loremBio, email: "advisor3@rid.rw", linkedin: "#" }
 ];
 
 export default function About() {

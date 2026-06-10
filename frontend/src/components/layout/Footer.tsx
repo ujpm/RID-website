@@ -120,7 +120,7 @@ export default function Footer() {
             </a>
           </div>
           <div className={styles.socialIcons}>
-            <a href="#" aria-label="LinkedIn"><LinkedInIcon /></a>
+            <a href="https://www.linkedin.com/company/ines-research-innovation-club/" aria-label="LinkedIn"><LinkedInIcon /></a>
             <a href="#" aria-label="Twitter"><TwitterIcon /></a>
             <a href="#" aria-label="YouTube"><YouTubeIcon /></a>
           </div>

@@ -5,7 +5,7 @@
 import ImpactMetrics from '../components/ui/ImpactMetrics';
 import styles from './Impact.module.css';
 
-// Projects extracted directly from RID Strategic Profile
+// Projects
 const projects = [
   {
     id: 1,
@@ -13,7 +13,7 @@ const projects = [
     category: "Assistive Technology",
     description: "A smart glove that translates sign language into speech, addressing communication challenges for people with hearing and speech impairments. Ranked sixth nationally in the ALX Rwanda innovation competition.",
     status: "Completed",
-    image: "/images/impact-innovation.jpg" 
+    image: "/images/smart-glove.jpg" 
   },
   {
     id: 2,
@@ -21,15 +21,15 @@ const projects = [
     category: "Digital Health",
     description: "Implemented in partnership with the IREME initiative. A mobile-based digital health system connecting amputees with service providers for rehabilitation and follow-up via smartphones, USSD, and SMS.",
     status: "Ongoing",
-    image: "/images/impact-leadership.jpg"
+    image: "/images/slc.jpg"
   },
   {
     id: 3,
-    title: "Blood Cell Counting Program",
+    title: "Microsmart - the most affordabble smart microscope",
     category: "Diagnostics",
-    description: "A software program utilizing medical images to assist in blood cell counting in low-resource settings, supporting clinical diagnostics in healthcare facilities lacking advanced equipment.",
+    description: "Integrating smart hardware and AI, MicroSmart automates microscopy for blood, infectious diseases, and Pap smears, delivering reliable clinical diagnostics to low-resource healthcare settings.",
     status: "Completed",
-    image: "/images/impact-research.jpg"
+    image: "/images/microsmart.jpg"
   }
 ];
 
