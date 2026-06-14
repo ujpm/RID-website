@@ -21,7 +21,7 @@ const teamData = [
   { id: 4, name: "Mudatenguha leonce", role: "Treasurer", image: "/images/team/1.jpg", bio: loremBio, email: "treasurer@rid.rw", linkedin: "#" },
   { id: 5, name: "UWIZEYIMANA Jean Pierre", role: "Research & Innovation", image: "/images/team/1.jpg", bio: loremBio, email: "research@rid.rw", linkedin: "#" },
   { id: 6, name: "Stella Fideline NIYONKURU", role: "Youth Dev & Capacity", image: "/images/team/1.jpg", bio: loremBio, email: "youth@rid.rw", linkedin: "#" },
-  { id: 7, name: "Mousa Suliman", role: "Executive Director", image: "/images/team/1.jpg", bio: loremBio, email: "director@rid.rw", linkedin: "#" }
+  { id: 7, name: "Mousa Suliman", role: "Executive Director", image: "/images/team/moussa.jpg", bio: loremBio, email: "director@rid.rw", linkedin: "#" }
 ];
 
 // Board of Advisors data

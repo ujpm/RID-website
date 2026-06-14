@@ -13,29 +13,29 @@ import styles from './Testimonials.module.css';
 const testimonialsData = [
   { 
     id: 1, 
-    name: "Amira Elamin", 
+    name: "Sarah simon", 
     role: "Student", 
-    country: "Sudan",
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    avatar: "/images/team/1.jpg",
-    flag: "/images/flags/sd.png"
+    country: "South Sudan",
+    quote: "This training has been one of the most impactful learning experiences I have had. It equipped me with valuable leadership, public speaking, and teamwork skills while boosting my confidence and self-belief. The trainers created an engaging and supportive environment that encouraged growth and active participation. I proudly recommend this program to anyone who wants to unlock their potential and become a more effective leader and communicator.",
+    avatar: "/images/testimonials/simon.jpg",
+    flag: "/images/flags/ss.png"
   },
   { 
     id: 2, 
-    name: "Mabior Deng", 
+    name: "Momoun Mohammed Adam", 
     role: "Student", 
     country: "South Sudan",
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    avatar: "/images/team/1.jpg",
+    quote: "I participated in the RID Soft Skills Training at INES Ruhengeri, which greatly contributed to my personal and academic development. The program improved my understanding of ICT and Artificial Intelligence (AI) and their importance in education and future careers. It also strengthened my communication, public speaking, and teamwork skills. Through the sessions, I gained leadership abilities, increased self-confidence, and learned to collaborate effectively with others. The trainers created a supportive and engaging environment that encouraged active participation and growth. Overall, the experience was highly valuable, and I strongly recommend it to future students.",
+    avatar: "/images/testimonials/adam.jpg",
     flag: "/images/flags/ss.png"
   },
   { 
     id: 3, 
-    name: "Claire Mutoni", 
+    name: "Thomas NSENGIYAREMYE", 
     role: "Student", 
     country: "Rwanda",
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    avatar: "/images/team/1.jpg",
+    quote: "I attended soft skills sessions set for RID in INES RUHENGERI. the sessions of soft skills are so helpful as it made me aware on the use of modern technology such as ICT, AI in my studies which hel me in exploring the globe especially in the domain of health sciences. It also equiped me with communication skills which helps in interacting with the people, enhancing relationship and teamwork. So these sessions were in need and it would be better if we have another sessions.",
+    avatar: "/images/testimonials/thomas.jpg",
     flag: "/images/flags/rw.png"
   },
   { 
