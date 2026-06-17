@@ -1,40 +1,49 @@
-/**
- * Support Page Component
- * Call to action page for partnerships, donations, and volunteering.
- */
+import React, { useState } from 'react';
+import { Mail, HeartHandshake, Banknote } from 'lucide-react'; // Professional icons
+import SupportModal from '../components/ui/SupportModal';
 import styles from './Support.module.css';
 
-export default function Support() {
-  return (
-    <div className={styles.pageContainer}>
-      <header className={styles.hero}>
-        <div className={styles.heroContent}>
-          <h1 className={styles.title}>Get Involved</h1>
-          <p className={styles.subtitle}>
-            Your support accelerates African innovation. Partner with us to scale our impact.
-          </p>
-        </div>
-      </header>
+const Support: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-      <section className={styles.contentSection}>
-        <div className={styles.container}>
-          <div className={styles.actionGrid}>
-            <div className={styles.actionCard}>
-              <div className={styles.iconPlaceholder}>🤝</div>
-              <h2 className={styles.cardTitle}>Partner With Us</h2>
-              <p className={styles.cardDesc}>Collaborate on research projects, co-host masterclasses, or provide organizational backing.</p>
-              <button className={styles.actionBtn}>Become a Partner</button>
-            </div>
-            
-            <div className={styles.actionCard}>
-              <div className={styles.iconPlaceholder}>💡</div>
-              <h2 className={styles.cardTitle}>Become a Mentor</h2>
-              <p className={styles.cardDesc}>Share your industry expertise and guide the next generation of biomedical innovators.</p>
-              <button className={styles.actionBtn}>Apply to Mentor</button>
-            </div>
-          </div>
+  return (
+    <div className={styles.supportContainer}>
+      <h1 className={styles.pageTitle}>Support Us</h1>
+      
+      <div className={styles.cardsGrid}>
+        {/* Card 1: Contact/Support Mail */}
+        <div className={styles.supportCard}>
+          <Mail className={styles.cardIcon} size={32} />
+          <h3>Contact Support</h3>
+          <p>Have a question or need assistance? Reach out to our dedicated team.</p>
+          <a href="mailto:support@ridlab.xyz" className={styles.cardLink}>support@ridlab.xyz</a>
         </div>
-      </section>
+
+        {/* Card 2: Partner With Us */}
+        <div className={styles.supportCard}>
+          <HeartHandshake className={styles.cardIcon} size={32} />
+          <h3>Partner With Us</h3>
+          <p>Collaborate with us to expand our impact and empower youth.</p>
+          <button className={styles.cardButton}>View Partner Form</button> 
+          {/* We will wire this button up to the partner form in the next phase */}
+        </div>
+
+        {/* Card 3: Support Our Mission */}
+        <div className={styles.supportCard} onClick={() => setIsModalOpen(true)}>
+          <Banknote className={styles.cardIcon} size={32} />
+          <h3>Support Our Mission</h3>
+          <p>Contribute to our initiatives and help us build sustainable solutions.</p>
+          <button className={styles.cardButton}>Make a Contribution</button>
+        </div>
+      </div>
+
+      {/* Render the Modal cleanly outside the main flow */}
+      <SupportModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </div>
   );
-}
+};
+
+export default Support;
