@@ -1,87 +1,70 @@
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 1rem;
+/* Scoped styles for Support Modal */
+.modalBackdrop {
+  position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1.5rem; animation: fadeIn 0.3s ease;
 }
 
 .modalContent {
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 2rem;
-  width: 100%;
-  max-width: 500px;
-  position: relative;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  animation: slideUp 0.3s ease-out;
+  background-color: white; border-radius: 16px; width: 100%; max-width: 550px; padding: 2.5rem;
+  position: relative; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 90vh; overflow-y: auto;
 }
 
-.closeButton {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  color: #666;
-  cursor: pointer;
-  transition: color 0.2s ease;
+.closeBtn {
+  position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem; background: transparent; border: none;
+  color: #94a3b8; cursor: pointer; transition: color 0.2s ease; line-height: 1;
+}
+.closeBtn:hover { color: var(--color-secondary); }
+
+.title { font-size: 1.8rem; color: var(--color-primary); margin-bottom: 0.5rem; font-weight: 800; }
+.subtitle { color: #64748b; font-size: 1rem; margin-bottom: 2rem; line-height: 1.5; }
+
+/* Form Styles */
+.form { display: flex; flex-direction: column; gap: 1.25rem; }
+.inputGroup { display: flex; flex-direction: column; text-align: left; }
+.label { font-size: 0.9rem; font-weight: 600; color: var(--color-primary); margin-bottom: 0.5rem; }
+
+.input, .textarea, .select {
+  width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 8px;
+  font-size: 1rem; font-family: inherit; background-color: white; transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.input:focus, .textarea:focus, .select:focus { outline: none; border-color: var(--color-secondary); box-shadow: 0 0 0 3px rgba(239, 108, 0, 0.1); }
+
+.submitBtn {
+  background-color: var(--color-secondary); color: white; border: none; padding: 1rem 2rem;
+  font-size: 1rem; font-weight: 700; border-radius: 8px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; margin-top: 0.5rem;
+}
+.submitBtn:hover { background-color: #d05303; transform: translateY(-2px); }
+
+/* Success State Styles */
+.successState { text-align: center; padding: 2rem 0; }
+.successIcon { font-size: 4rem; color: #10b981; margin-bottom: 1rem; }
+.closeActionBtn { background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 0.75rem 2.5rem; font-size: 1rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; margin-top: 1.5rem; }
+.closeActionBtn:hover { background-color: #e2e8f0; color: var(--color-primary); }
+
+/* Support/Agaseke State Styles */
+.supportState { text-align: center; padding: 1rem 0; }
+.supportText { color: #475569; line-height: 1.6; font-size: 1.05rem; margin-bottom: 1.5rem; text-align: left; }
+.agasekeBtn { display: inline-block; background-color: var(--color-secondary); color: white; text-decoration: none; padding: 1rem 2.5rem; font-size: 1.1rem; font-weight: 700; border-radius: 8px; transition: background-color 0.3s ease, transform 0.2s ease; margin-top: 1rem; }
+.agasekeBtn:hover { background-color: #d05303; transform: translateY(-2px); }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalPop { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+@media (max-width: 600px) {
+  .modalContent { padding: 1.5rem; }
 }
 
-.closeButton:hover {
-  color: #000;
+/* Error & Disabled States */
+.errorMessage {
+  background-color: #fee2e2; color: #b91c1c; padding: 0.75rem; border-radius: 8px; margin-bottom: 1rem;
+  font-size: 0.9rem; font-weight: 600; text-align: center; border: 1px solid #f87171;
 }
 
-.modalTitle {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 1rem;
-  padding-right: 2rem; /* Prevent overlap with close button */
+.input:disabled, .textarea:disabled, .select:disabled {
+  background-color: #f1f5f9; cursor: not-allowed; opacity: 0.7;
 }
 
-.modalBody {
-  color: #555;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-.modalBody p {
-  margin-bottom: 1rem;
-}
-
-.modalActions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.primaryButton {
-  display: inline-block;
-  background-color: #0056b3; /* Adjust to match your RID brand primary color */
-  color: #ffffff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-}
-
-.primaryButton:hover {
-  background-color: #004494;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.submitBtn:disabled {
+  background-color: #94a3b8; cursor: not-allowed; transform: none; box-shadow: none;
 }

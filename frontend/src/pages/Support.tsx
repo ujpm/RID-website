@@ -1,49 +1,77 @@
-import React, { useState } from 'react';
-import { Mail, HeartHandshake, Banknote } from 'lucide-react'; // Professional icons
+/**
+ * Support Page Component
+ * Call to action page for partnerships, donations, and volunteering.
+ * Uses Lucide icons and dynamic SupportModal for interaction.
+ */
+import { useState } from 'react';
+import { Handshake, Lightbulb, Banknote } from 'lucide-react';
 import SupportModal from '../components/ui/SupportModal';
 import styles from './Support.module.css';
 
-const Support: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export default function Support() {
+  const [modalConfig, setModalConfig] = useState<{ isOpen: boolean; type: string }>({
+    isOpen: false,
+    type: ''
+  });
+
+  const openModal = (type: string) => setModalConfig({ isOpen: true, type });
+  const closeModal = () => setModalConfig({ isOpen: false, type: '' });
 
   return (
-    <div className={styles.supportContainer}>
-      <h1 className={styles.pageTitle}>Support Us</h1>
-      
-      <div className={styles.cardsGrid}>
-        {/* Card 1: Contact/Support Mail */}
-        <div className={styles.supportCard}>
-          <Mail className={styles.cardIcon} size={32} />
-          <h3>Contact Support</h3>
-          <p>Have a question or need assistance? Reach out to our dedicated team.</p>
-          <a href="mailto:support@ridlab.xyz" className={styles.cardLink}>support@ridlab.xyz</a>
+    <div className={styles.pageContainer}>
+      <header className={styles.hero}>
+        <div className={styles.heroContent}>
+          <h1 className={styles.title}>Get Involved</h1>
+          <p className={styles.subtitle}>
+            Your support accelerates African innovation. Partner with us to scale our impact.
+          </p>
         </div>
+      </header>
 
-        {/* Card 2: Partner With Us */}
-        <div className={styles.supportCard}>
-          <HeartHandshake className={styles.cardIcon} size={32} />
-          <h3>Partner With Us</h3>
-          <p>Collaborate with us to expand our impact and empower youth.</p>
-          <button className={styles.cardButton}>View Partner Form</button> 
-          {/* We will wire this button up to the partner form in the next phase */}
+      <section className={styles.contentSection}>
+        <div className={styles.container}>
+          <div className={styles.actionGrid}>
+            
+            {/* Partnership Card */}
+            <div className={styles.actionCard}>
+              <div className={styles.iconWrapper}>
+                <Handshake size={48} strokeWidth={1.5} />
+              </div>
+              <h2 className={styles.cardTitle}>Partner With Us</h2>
+              <p className={styles.cardDesc}>Collaborate on research projects, co-host masterclasses, or provide organizational backing.</p>
+              <button className={styles.actionBtn} onClick={() => openModal('Partner')}>Become a Partner</button>
+            </div>
+            
+            {/* Mentorship Card */}
+            <div className={styles.actionCard}>
+              <div className={styles.iconWrapper}>
+                <Lightbulb size={48} strokeWidth={1.5} />
+              </div>
+              <h2 className={styles.cardTitle}>Become a Mentor</h2>
+              <p className={styles.cardDesc}>Share your industry expertise and guide the next generation of biomedical innovators.</p>
+              <button className={styles.actionBtn} onClick={() => openModal('Mentor')}>Apply to Mentor</button>
+            </div>
+
+            {/* Support/Agaseke Card */}
+            <div className={styles.actionCard}>
+              <div className={styles.iconWrapper}>
+                <Banknote size={48} strokeWidth={1.5} />
+              </div>
+              <h2 className={styles.cardTitle}>Support Our Mission</h2>
+              <p className={styles.cardDesc}>Fuel our grassroots initiatives by contributing directly to our skills training and innovation hubs.</p>
+              <button className={styles.actionBtn} onClick={() => openModal('Support')}>Contribute</button>
+            </div>
+
+          </div>
         </div>
+      </section>
 
-        {/* Card 3: Support Our Mission */}
-        <div className={styles.supportCard} onClick={() => setIsModalOpen(true)}>
-          <Banknote className={styles.cardIcon} size={32} />
-          <h3>Support Our Mission</h3>
-          <p>Contribute to our initiatives and help us build sustainable solutions.</p>
-          <button className={styles.cardButton}>Make a Contribution</button>
-        </div>
-      </div>
-
-      {/* Render the Modal cleanly outside the main flow */}
+      {/* Dynamic Modal Integration */}
       <SupportModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+        isOpen={modalConfig.isOpen} 
+        type={modalConfig.type} 
+        onClose={closeModal} 
       />
     </div>
   );
-};
-
-export default Support;
+}

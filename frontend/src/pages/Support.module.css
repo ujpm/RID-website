@@ -8,14 +8,16 @@
 .subtitle { font-size: 1.2rem; line-height: 1.6; color: #cbd5e1; }
 
 .contentSection { padding: 5rem 0; }
-.actionGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+.actionGrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; justify-content: center; }
 
-.actionCard { background-color: white; border-radius: 12px; padding: 4rem 2rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 2px solid transparent; transition: border-color 0.3s ease; }
-.actionCard:hover { border-color: var(--color-secondary); }
+.actionCard { background-color: white; border-radius: 12px; padding: 4rem 2rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 2px solid transparent; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; display: flex; flex-direction: column; align-items: center; }
+.actionCard:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-color: var(--color-secondary); }
 
-.iconPlaceholder { font-size: 3rem; margin-bottom: 1.5rem; }
-.cardTitle { font-size: 1.8rem; color: var(--color-primary); margin-bottom: 1rem; font-weight: 700; }
-.cardDesc { line-height: 1.6; color: #64748b; margin-bottom: 2.5rem; font-size: 1.05rem; }
+.iconWrapper { color: var(--color-primary); margin-bottom: 1.5rem; transition: color 0.3s ease, transform 0.3s ease; }
+.actionCard:hover .iconWrapper { color: var(--color-secondary); transform: scale(1.1); }
 
-.actionBtn { background-color: var(--color-secondary); color: white; border: none; padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; }
+.cardTitle { font-size: 1.6rem; color: var(--color-primary); margin-bottom: 1rem; font-weight: 700; }
+.cardDesc { line-height: 1.6; color: #64748b; margin-bottom: 2.5rem; font-size: 1rem; flex-grow: 1; }
+
+.actionBtn { background-color: var(--color-secondary); color: white; border: none; padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; width: 100%; }
 .actionBtn:hover { background-color: #d05303; transform: translateY(-2px); }
