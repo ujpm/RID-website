@@ -13,10 +13,10 @@ import styles from './Testimonials.module.css';
 const testimonialsData = [
   { 
     id: 1, 
-    name: "Sarah simon", 
+    name: "Sarah Simon", 
     role: "Student", 
     country: "South Sudan",
-    quote: "This training has been one of the most impactful learning experiences I have had. It equipped me with valuable leadership, public speaking, and teamwork skills while boosting my confidence and self-belief. The trainers created an engaging and supportive environment that encouraged growth and active participation. I proudly recommend this program to anyone who wants to unlock their potential and become a more effective leader and communicator.",
+    quote: "This program equipped me with valuable leadership, public speaking, and teamwork skills while boosting my confidence. The supportive environment encouraged growth and helped me unlock my full potential.",
     avatar: "/images/testimonials/simon.jpg",
     flag: "/images/flags/ss.png"
   },
@@ -24,55 +24,19 @@ const testimonialsData = [
     id: 2, 
     name: "Momoun Mohammed Adam", 
     role: "Student", 
-    country: "South Sudan",
-    quote: "I participated in the RID Soft Skills Training at INES Ruhengeri, which greatly contributed to my personal and academic development. The program improved my understanding of ICT and Artificial Intelligence (AI) and their importance in education and future careers. It also strengthened my communication, public speaking, and teamwork skills. Through the sessions, I gained leadership abilities, increased self-confidence, and learned to collaborate effectively with others. The trainers created a supportive and engaging environment that encouraged active participation and growth. Overall, the experience was highly valuable, and I strongly recommend it to future students.",
+    country: "Sudan",
+    quote: "The training strengthened my soft skills in communication and teamwork while expanding my understanding of ICT and AI. The engaging environment boosted my confidence and collaborative abilities.",
     avatar: "/images/testimonials/adam.jpg",
-    flag: "/images/flags/ss.png"
+    flag: "/images/flags/sd.png"
   },
   { 
     id: 3, 
-    name: "Thomas NSENGIYAREMYE", 
+    name: "Thomas Nsengiyaremye", 
     role: "Student", 
     country: "Rwanda",
-    quote: "I attended soft skills sessions set for RID in INES RUHENGERI. the sessions of soft skills are so helpful as it made me aware on the use of modern technology such as ICT, AI in my studies which hel me in exploring the globe especially in the domain of health sciences. It also equiped me with communication skills which helps in interacting with the people, enhancing relationship and teamwork. So these sessions were in need and it would be better if we have another sessions.",
+    quote: "The soft skills sessions enhanced my communication and teamwork abilities while introducing me to modern technologies like ICT and AI. This training will help me excel in my academic and professional journey.",
     avatar: "/images/testimonials/thomas.jpg",
     flag: "/images/flags/rw.png"
-  },
-  { 
-    id: 4, 
-    name: "Samuel Ochieng", 
-    role: "Student", 
-    country: "Kenya",
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    avatar: "/images/team/1.jpg",
-    flag: "/images/flags/ke.png"
-  },
-  { 
-    id: 5, 
-    name: "Fatime Mahamat", 
-    role: "Student", 
-    country: "Chad",
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    avatar: "/images/team/1.jpg",
-    flag: "/images/flags/td.png"
-  },
-  { 
-    id: 6, 
-    name: "Josephine Kollie", 
-    role: "Student", 
-    country: "Liberia",
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    avatar: "/images/team/1.jpg",
-    flag: "/images/flags/lr.png"
-  },
-  { 
-    id: 7, 
-    name: "Oluwaseun Adeyemi", 
-    role: "Student", 
-    country: "Nigeria",
-    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    avatar: "/images/team/1.jpg",
-    flag: "/images/flags/ng.png"
   }
 ];
 
