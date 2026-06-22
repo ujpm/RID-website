@@ -5,8 +5,8 @@
  */
 import { Link } from 'react-router-dom';
 import { Mail, MapPin } from 'lucide-react';
+import { useModal } from '../../context/ModalContext';
 import styles from './Footer.module.css';
-
 
 const LinkedInIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -30,6 +30,13 @@ const YouTubeIcon = () => (
 );
 
 export default function Footer() {
+  const { openModal } = useModal();
+
+  // Helper inline style to reset button defaults so it looks like a link
+  const linkBtnStyle: React.CSSProperties = {
+    background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', padding: 0, font: 'inherit', textAlign: 'left'
+  };
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -38,12 +45,7 @@ export default function Footer() {
         <div className={styles.newsletter}>
           <h3 className={styles.newsletterTitle}>Join Our Innovation Ecosystem</h3>
           <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-            <input 
-              type="email" 
-              placeholder="Enter your email address" 
-              className={styles.input}
-              required 
-            />
+            <input type="email" placeholder="Enter your email address" className={styles.input} required />
             <button type="submit" className={styles.submitBtn}>Subscribe</button>
           </form>
         </div>
@@ -51,18 +53,9 @@ export default function Footer() {
         {/* Main Footer Navigation & Info Grid */}
         <div className={styles.grid}>
           
-          {/* Column 1: Brand & Mission */}
           <div className={styles.brand}>
             <Link to="/" style={{ textDecoration: 'none', display: 'inline-block', marginBottom: '15px' }}>
-              <img
-                src="/images/logo-1-bg.png"
-                alt="RID Logo"
-                style={{ height: '45px', width: 'auto', filter: 'brightness(0) invert(1)' }} 
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  e.currentTarget.parentElement!.innerHTML = '<h3 class="' + styles.brandName + '">RID</h3>';
-                }}
-              />
+              <img src="/images/logo-1-bg.png" alt="RID Logo" style={{ height: '45px', width: 'auto', filter: 'brightness(0) invert(1)' }} />
             </Link>
             <p className={styles.brandDesc}>
               Empowering the next generation of African innovators through research, 
@@ -70,54 +63,35 @@ export default function Footer() {
             </p>
           </div>
           
-          {/* Column 2: Quick Links */}
           <div className={styles.links}>
             <h4 className={styles.columnTitle}>Quick Links</h4>
             <Link to="/" className={styles.linkItem}>Home</Link>
             <Link to="/programs" className={styles.linkItem}>Programs</Link>
-            <Link to="/admin" className={styles.linkItem}>Admin Access</Link>
             <Link to="/impact" className={styles.linkItem}>Impact</Link>
             <Link to="/research" className={styles.linkItem}>Research</Link>
+            <Link to="/admin" className={styles.linkItem}>Admin Access</Link>
           </div>
 
-          {/* Column 3: Contact Information */}
+          {/* New Get Involved Section */}
+          <div className={styles.links}>
+            <h4 className={styles.columnTitle}>Get Involved</h4>
+            <button style={linkBtnStyle} className={styles.linkItem} onClick={() => openModal('Support')}>Support</button>
+            <button style={linkBtnStyle} className={styles.linkItem} onClick={() => openModal('Mentor')}>Become a Mentor</button>
+            <button style={linkBtnStyle} className={styles.linkItem} onClick={() => openModal('Member')}>Become a Member</button>
+          </div>
+
           <div className={styles.contact}>
             <h4 className={styles.columnTitle}>Contact Us</h4>
-            <div className={styles.contactItem}>
-              <MapPin size={18} />
-              <span>Musanze, Rwanda</span>
-            </div>
-            <div className={styles.contactItem}>
-              <Mail size={18} />
-              <span>contact@weare-rid.xyz</span>
-            </div>
+            <div className={styles.contactItem}><MapPin size={18} /><span>Musanze, Rwanda</span></div>
+            <div className={styles.contactItem}><Mail size={18} /><span>contact@weare-rid.xyz</span></div>
           </div>
-
         </div>
 
-        {/* Bottom Bar: Copyright & Socials */}
         <div className={styles.bottomBar}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '15px', flexWrap: 'wrap' }}>
             <p className={styles.copyright} style={{ margin: 0 }}>
               © {new Date().getFullYear()} Research and Innovation for Development. All rights reserved.
             </p>
-            <a 
-              href="https://ijean.xyz" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              style={{ 
-                fontSize: '0.85em', 
-                color: '#888', 
-                textDecoration: 'none', 
-                fontFamily: 'monospace', 
-                letterSpacing: '0.5px', 
-                transition: 'color 0.2s ease' 
-              }} 
-              onMouseOver={e => e.currentTarget.style.color = '#f39c12'} 
-              onMouseOut={e => e.currentTarget.style.color = '#888'}
-            >
-              dev:JP
-            </a>
           </div>
           <div className={styles.socialIcons}>
             <a href="https://www.linkedin.com/company/ines-research-innovation-club/" aria-label="LinkedIn"><LinkedInIcon /></a>
@@ -125,7 +99,6 @@ export default function Footer() {
             <a href="#" aria-label="YouTube"><YouTubeIcon /></a>
           </div>
         </div>
-
       </div>
     </footer>
   );

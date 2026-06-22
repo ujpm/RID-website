@@ -6,6 +6,7 @@
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
+import { useModal } from '../../context/ModalContext';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -34,6 +35,8 @@ const heroSlides = [
 ];
 
 export default function Hero() {
+  const { openModal } = useModal();
+
   return (
     <section className={styles.heroWrapper}>
       <Swiper
@@ -46,19 +49,17 @@ export default function Hero() {
       >
         {heroSlides.map((slide) => (
           <SwiperSlide key={slide.id}>
-            {/* Slide Background Image */}
             <div 
               className={styles.slideBackground}
               style={{ backgroundImage: `url(${slide.imgSrc})` }}
             >
-              {/* Gradient Overlay */}
               <div className={styles.overlay}>
                 <div className={styles.heroContent}>
                   <h1 className={styles.title}>{slide.title}</h1>
                   <p className={styles.subtitle}>{slide.subtitle}</p>
                   <div className={styles.ctaGroup}>
                     <Link to="/programs" className={styles.primaryBtn}>Explore Our Programs</Link>
-                    <Link to="/impact" className={styles.secondaryBtn}>See Our Impact</Link>
+                    <button onClick={() => openModal('Member')} className={styles.secondaryBtn}>Become a Member</button>
                   </div>
                 </div>
               </div>

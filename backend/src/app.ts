@@ -1,4 +1,5 @@
 import inquiryRoutes from './routes/inquiryRoutes';
+import memberRoutes from './routes/memberRoutes';
 import express from 'express';
 import type { Application, Request, Response } from 'express';
 import cors from 'cors';
@@ -27,6 +28,7 @@ app.use('/api/upload', uploadRoutes);
 app.use('/api/gallery', galleryRoutes);
 app.use('/api/metrics', metricRoutes);
 app.use('/api/inquiries', inquiryRoutes);
+app.use('/api/members', memberRoutes);
 
 app.get('/api/health', (req: Request, res: Response) => {
   res.status(200).json({

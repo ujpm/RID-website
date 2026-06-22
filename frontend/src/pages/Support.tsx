@@ -1,21 +1,14 @@
 /**
  * Support Page Component
  * Call to action page for partnerships, donations, and volunteering.
- * Uses Lucide icons and dynamic SupportModal for interaction.
+ * Uses Lucide icons and Global Modal Context for interaction.
  */
-import { useState } from 'react';
-import { Handshake, Lightbulb, Banknote } from 'lucide-react';
-import SupportModal from '../components/ui/SupportModal';
+import { Handshake, Lightbulb, Banknote, UserPlus } from 'lucide-react';
+import { useModal } from '../context/ModalContext';
 import styles from './Support.module.css';
 
 export default function Support() {
-  const [modalConfig, setModalConfig] = useState<{ isOpen: boolean; type: string }>({
-    isOpen: false,
-    type: ''
-  });
-
-  const openModal = (type: string) => setModalConfig({ isOpen: true, type });
-  const closeModal = () => setModalConfig({ isOpen: false, type: '' });
+  const { openModal } = useModal();
 
   return (
     <div className={styles.pageContainer}>
@@ -32,6 +25,16 @@ export default function Support() {
         <div className={styles.container}>
           <div className={styles.actionGrid}>
             
+            {/* Membership Card */}
+            <div className={styles.actionCard}>
+              <div className={styles.iconWrapper}>
+                <UserPlus size={48} strokeWidth={1.5} />
+              </div>
+              <h2 className={styles.cardTitle}>Become a Member</h2>
+              <p className={styles.cardDesc}>Join our vibrant network of youth shaping the future of research and innovation in Africa.</p>
+              <button className={styles.actionBtn} onClick={() => openModal('Member')}>Join Us</button>
+            </div>
+
             {/* Partnership Card */}
             <div className={styles.actionCard}>
               <div className={styles.iconWrapper}>
@@ -65,13 +68,6 @@ export default function Support() {
           </div>
         </div>
       </section>
-
-      {/* Dynamic Modal Integration */}
-      <SupportModal 
-        isOpen={modalConfig.isOpen} 
-        type={modalConfig.type} 
-        onClose={closeModal} 
-      />
     </div>
   );
 }
