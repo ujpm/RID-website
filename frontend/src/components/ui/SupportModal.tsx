@@ -56,16 +56,17 @@ export default function SupportModal({ isOpen, type, onClose }: SupportModalProp
     setIsLoading(true);
     setError(null);
 
-    // Build the dynamic payload matching your backend Inquiry model
-    const payload = {
-      name: formData.name,
-      email: formData.email,
-      message: formData.message,
-      type: type,
-      additionalData: type === 'Partner' 
-        ? { organization: formData.organization, interest: formData.interest }
-        : { linkedin: formData.linkedin, expertise: formData.expertise }
-    };
+const inquiryType = type; // This sends 'Partner' or 'Mentor'
+const formattedMessage = type === 'Partner' 
+  ? `Organization: ${formData.organization}\nInterest: ${formData.interest}\n\nMessage: ${formData.message}`
+  : `LinkedIn: ${formData.linkedin}\nExpertise: ${formData.expertise}\n\nMessage: ${formData.message}`;
+
+const payload = {
+  name: formData.name,
+  email: formData.email,
+  inquiryType: inquiryType, // Backend expects this key
+  message: formattedMessage // Merged message
+};
 
     try {
       // Execute the POST request to the backend API
